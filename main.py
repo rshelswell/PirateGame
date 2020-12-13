@@ -4,14 +4,14 @@ import random, re
 def get_input(inp=""):
 	if inp == "quit":
 		return inp
-	inp = input("Choose square and/or get next: ")
+	inp = input("Choose square and/or enter to get next: ")
 	if len(inp) == 0:
 		return "next"
 	x = re.search(r"[a-g][1-7]", inp)
 	if x != None:
 		return inp
 	else:
-		print("invalid square chosen, use format a1")
+		print("invalid square chosen, use format a1, with columns a-g and rows 1-7")
 		return get_input()
 
 
@@ -30,3 +30,7 @@ def pirates():
 			used.append(pos)  #add it to the list of places we've been
 
 			# while user input isn't useful keep trying.
+
+if __name__ == '__main__':
+	pirates()
+	
