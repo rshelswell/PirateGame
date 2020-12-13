@@ -34,7 +34,7 @@ def pirates():
 			# while user input isn't useful keep trying.
 			pos = get_input(used)
 			if pos == "quit":
-				while true:
+				while True:
 					kp = input("Exiting game, are you sure? [Y/N]")
 					if kp == "Y":
 						exit
