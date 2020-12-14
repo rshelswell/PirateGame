@@ -51,4 +51,3 @@ def pirates():
 
 if __name__ == '__main__':
 	pirates()
-	
