@@ -25,7 +25,7 @@ def pirates():
 	while len(avail) > 0:  #only use the available grid squares
 		if pos == "next":
 			pos = avail.pop(random.randint(0,len(avail)-1))
-			print("Turn:",turn,pos, flush=True)
+		print("Turn", turn, ":", pos, flush=True)
 		turn += 1
 		used.append(pos)  #add it to the list of places we've been
 		# while user input isn't useful keep trying.
