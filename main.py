@@ -1,48 +1,46 @@
 import random, re
-
+from itertools import product
 
 def get_input(been_here):
-	
 	inp = input("Choose square and/or enter to get next: ").lower()
-	if inp == "quit":
-		return inp
-	if len(inp) == 0:
-		return "next"
-	x = re.match(r"^[a-g][1-7]$", inp)
+	x = re.match(r"^(quit|[a-g][1-7])$", inp)
+	# x = re.match(r"^[a-g][1-7]$", inp)
 	if x != None and inp not in been_here :
 		return inp
+	elif len(inp) == 0:
+	  return "next"
 	else:
 		print("invalid square chosen, use format a1, with columns a-g and rows 1-7")
 		return get_input(been_here)
 
-
 def pirates():
 	cols = ["a", "b", "c", "d", "e", "f", "g"]
-	rows = [r for r in range(1, 8)]
-	used = []
+	rows = [str(r) for r in range(1, 8)]
+	avail = [i + j for i, j in product(cols, rows)] #all available squares : a1 to g7
+	used = []  # squares that have been selected
 	pos = "next"
-	while len(used) < 49:  #only 49 grid squares available
+	turn = 1
+	
+	while len(avail) > 0:  #only use the available grid squares
 		if pos == "next":
-			l = random.randint(0, 6)  #choose a letter position
-			n = random.randint(0, 6)  #choose a number position
-			pos = cols[l] + str(rows[n])  #create grid ref
-		if (pos not in used):
-			#check we haven't already been there
-			print(pos)
-			used.append(pos)  #add it to the list of places we've been
-
-			# while user input isn't useful keep trying.
-			pos = get_input(used)
-			if pos == "quit":
-				while True:
-					kp = input("Exiting game, are you sure? [Y/N]")
-					if kp == "Y":
-						exit
-					elif kp == "N":
-						break
-					else:
-						continue
-				
+		  pos = avail.pop(random.randint(0,len(avail)-1))
+		print("Turn:",turn,pos, flush=True)
+		turn += 1
+		used.append(pos)  #add it to the list of places we've been
+		# while user input isn't useful keep trying.
+		pos = get_input(used)
+		if pos == "quit":
+		  while True:
+		    kp = input("Exiting game, are you sure? [Y/N]")
+		    if kp == "Y":
+		      return
+		    elif kp == "N":
+		      pos = "next"
+		      break
+		    else:
+		      continue
+		elif pos != "next":
+		  avail.remove(pos)
 
 if __name__ == '__main__':
 	pirates()
