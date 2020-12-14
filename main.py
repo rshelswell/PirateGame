@@ -13,6 +13,9 @@ def get_input(been_here):
 		print("invalid square chosen, use format a1, with columns a-g and rows 1-7")
 		return get_input(been_here)
 
+def finished(end_type="complete"):
+	return "Game "+endtype+", you have used these squares in order:"
+
 def pirates():
 	cols = ["a", "b", "c", "d", "e", "f", "g"]
 	rows = [str(r) for r in range(1, 8)]
@@ -28,11 +31,15 @@ def pirates():
 		turn += 1
 		used.append(pos)  #add it to the list of places we've been
 		# while user input isn't useful keep trying.
-		pos = get_input(used)
+		if len(avail) : 
+			pos = get_input(used) # only ask for more input if we haven't finished.
+		else :
+			print(finished(), used)
 		if pos == "quit":
 		  while True:
 		    kp = input("Exiting game, are you sure? [Y/N]")
 		    if kp == "Y":
+				print(finished("quit", used)
 		      return
 		    elif kp == "N":
 		      pos = "next"
