@@ -13,7 +13,7 @@ def get_input(been_here):
 		return get_input(been_here)
 
 def finished(end_type="complete"):
-	return "Game "+endtype+", you have used these squares in order:"
+	return "Game "+end_type+", you have used these squares in order:"
 
 def pirates():
 	cols = ["a", "b", "c", "d", "e", "f", "g"]
@@ -33,6 +33,7 @@ def pirates():
 			pos = get_input(used) # only ask for more input if we haven't finished.
 		else :
 			print(finished(), used)
+			return
 		if pos == "quit":
 			while True:
 				kp = input("Exiting game, are you sure? [Y/N]")
